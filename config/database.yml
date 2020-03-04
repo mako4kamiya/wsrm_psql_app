@@ -1,22 +1,28 @@
 default: &default
   adapter: postgresql
-  encoding: unicode
-  # For details on connection pooling, see Rails configuration guide
-  # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
 
 development:
   <<: *default
-  username: MakoKamiya
-  database: wsrm_development
+  database: <%= ENV.fetch("POSTGRES_DATABASE") %>_development
 
 test:
-  <<: *default
-  username: MakoKamiya
-  database: wsrm_test
+  adapter: postgresql
+  encoding: utf8
+  reconnect: false
+  database: <%= ENV.fetch("POSTGRES_DATABASE") %>_test
+  pool: 5
+  username: <%= ENV.fetch("POSTGRES_USERNAME") %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") %>
+  host: <%= ENV.fetch("POSTGRES_HOST") %>
 
 production:
-  <<: *default
-  database: wsrm
-  username: postgres
-  password: <%= ENV['WSRM_PSQL_APP_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  encoding: utf8
+  reconnect: false
+  database: <%= ENV.fetch("POSTGRES_DATABASE") %>
+  pool: 5
+  username: <%= ENV.fetch("POSTGRES_USERNAME") %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") %>
+  host: <%= ENV.fetch("POSTGRES_HOST") %>
