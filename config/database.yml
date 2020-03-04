@@ -1,28 +1,28 @@
 default: &default
   adapter: postgresql
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
   timeout: 5000
 
 development:
   <<: *default
-  database: <%= ENV.fetch("POSTGRES_DATABASE") %>_development
+  database: <%= ENV.fetch('PSQL_DATABASE') %>_development
 
 test:
   adapter: postgresql
   encoding: utf8
   reconnect: false
-  database: <%= ENV.fetch("POSTGRES_DATABASE") %>_test
+  database: <%= ENV.fetch('PSQL_DATABASE') %>_test
   pool: 5
-  username: <%= ENV.fetch("POSTGRES_USERNAME") %>
-  password: <%= ENV.fetch("POSTGRES_PASSWORD") %>
-  host: <%= ENV.fetch("POSTGRES_HOST") %>
+  username: <%= ENV.fetch('PSQL_USERNAME') %>
+  password: <%= ENV.fetch('PSQL_PASSWORD') %>
+  host: <%= ENV.fetch('PSQL_HOST') %>
 
 production:
   adapter: postgresql
   encoding: utf8
   reconnect: false
-  database: <%= ENV.fetch("POSTGRES_DATABASE") %>
+  database: <%= ENV.fetch('PSQL_DATABASE', 'wsrm') %>
   pool: 5
-  username: <%= ENV.fetch("POSTGRES_USERNAME") %>
-  password: <%= ENV.fetch("POSTGRES_PASSWORD") %>
-  host: <%= ENV.fetch("POSTGRES_HOST") %>
+  username: <%= ENV.fetch('PSQL_USERNAME') %>
+  password: <%= ENV.fetch('PSQL_PASSWORD') %>
+  host: <%= ENV.fetch('PSQL_HOST') %>
